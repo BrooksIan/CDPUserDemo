@@ -20,6 +20,7 @@ use-case-phase-1/
 ├── requirements.txt    # Python deps for CAI Workbench sessions
 ├── data/               # Sample CSVs (redundant customer rows)
 ├── hadoop-conf/        # Cluster client XML for hdfs dfs / kinit
+├── images/             # UI screenshots for setup and Hue
 └── notebooks/          # Lab notebooks (run in order)
 ```
 
@@ -28,6 +29,7 @@ use-case-phase-1/
 | [`notebooks/`](./notebooks/) | Getting Started, dedup, and Iceberg / Hue publish exercises |
 | [`data/`](./data/) | Sample inputs (`redundant_data.csv`, larger variant) |
 | [`hadoop-conf/`](./hadoop-conf/) | Hadoop / Kerberos client config for HDFS CLI |
+| [`images/`](./images/) | Screenshots for CAI session, Hive auth, and Hue |
 | [`hueview.md`](./hueview.md) | Steps to verify notebook outputs in Hue |
 | [`requirements.txt`](./requirements.txt) | Session package install list |
 
@@ -50,9 +52,45 @@ use-case-phase-1/
 
 ## Getting started
 
-1. Open a CAI Workbench session in this project.
-2. Run notebooks under [`notebooks/`](./notebooks/) in order, starting with `00_Getting_Started.ipynb`.
-3. After HDFS copy and/or shared publish, follow [`hueview.md`](./hueview.md) to verify in Hue.
+### 1. Open the project and start a session
+
+In Cloudera AI Workbench, open this project and click **New Session**.
+
+![CAI project overview — New Session](./images/CreateNewSession.png)
+
+### 2. Configure the session runtime
+
+Choose **JupyterLab**, **Python 3.10**, and a Spark-enabled runtime image. Start with about **2 vCPU / 4 GiB** unless your environment requires more.
+
+![Start a new session — JupyterLab + Spark](./images/CreateNewSession1.png)
+
+### 3. Open the Phase 1 notebooks
+
+In the session file browser, go to `use-case-phase-1/notebooks/` and run the notebooks in order, starting with `00_Getting_Started.ipynb`.
+
+![Notebooks open in CAI session](./images/NoteBooksInSession.png)
+
+### 4. Shared Hive / Hue auth (before Exercise 2 publish)
+
+Before Step 0 in `02_Iceberg_REST_Catalog.ipynb`, gather credentials from CDW:
+
+1. Open your Hive Virtual Warehouse details.
+2. Use **ACTIONS → Copy JDBC URL**.
+3. Optionally open **JWT Auth Token Generator** (or Knox Token Generation) and create a short-lived token.
+
+![Virtual Warehouse — Copy JDBC URL](./images/FindVirtualWarehouseJDBC.png)
+
+![Knox / CDP token generation](./images/KnoxTokenGenerate.png)
+
+Paste the JDBC URL and workload password or JWT into the notebook connection form, then **Save** and **Test Hive connection**.
+
+![Step 0 — Shared Hive / Hue connection form](./images/TestHiveConnections.png)
+
+### 5. Verify in Hue
+
+After HDFS copy and/or shared publish, follow [`hueview.md`](./hueview.md) to confirm the file and `cdp_user_demo.*_shared` table in Hue.
+
+![Hue Editor — query shared table](./images/HueQuery_NewTable.png)
 
 ## Notes
 
