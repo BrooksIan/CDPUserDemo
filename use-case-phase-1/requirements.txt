@@ -1,0 +1,8 @@
+# Install pyspark if the session kernel does not already provide it.
+# Prefer the runtime Spark already on CAI when present; pip fill-in covers missing modules.
+pyspark>=3.4.0,<4.0.0
+python-Levenshtein>=0.21.0
+fuzzywuzzy>=0.18.0
+rapidfuzz>=3.0.0
+pytest>=7.4.0
+pytest-cov>=4.1.0
