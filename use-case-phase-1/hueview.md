@@ -2,8 +2,6 @@
 
 Use this guide after the Phase 1 notebooks to verify lab data in **Hue** — Cloudera’s web UI for browsing HDFS and querying Hive / Impala tables in CDW.
 
-Add screenshots under `images/hue/` when ready; placeholder paths are already wired below.
-
 ## When to use this guide
 
 | After notebook… | What you can verify in Hue |
@@ -27,10 +25,9 @@ Add screenshots under `images/hue/` when ready; placeholder paths are already wi
 
 1. In the CDP console, open your **Data Warehouse** (or Environment) experience.
 2. Select the Hive Virtual Warehouse used by this lab.
-3. Open **Hue** (often labeled **Open Hue** / **Hue** on the Virtual Warehouse).
+3. Open **Hue** — on the Virtual Warehouse details page, use **Open Data Explorer (Hue)**.
 
-<!-- Screenshot: CDP → Virtual Warehouse → Open Hue -->
-![Open Hue from CDP](images/hue/01-open-hue.png)
+![Open Hue from Virtual Warehouse](images/FindVirtualWarehouseJDBC.png)
 
 ## 2. Browse the HDFS sample file (after Getting Started)
 
@@ -40,9 +37,6 @@ After `00_Getting_Started.ipynb` copies the CSV with `hdfs dfs -put`, confirm it
 2. Navigate to `/tmp`.
 3. Locate `redundant_data.csv`.
 4. Open or preview the file and confirm columns `id`, `name`, `email`, `address`.
-
-<!-- Screenshot: Hue File Browser at /tmp/redundant_data.csv -->
-![Hue File Browser — /tmp/redundant_data.csv](images/hue/02-file-browser-tmp.png)
 
 Expected path:
 
@@ -70,9 +64,6 @@ After Step 4b publishes to the shared warehouse:
 
 Use the exact name printed by Step 4b if you overrode `ICEBERG_NAMESPACE` or `ICEBERG_SHARED_TABLE`.
 
-<!-- Screenshot: Table Browser → cdp_user_demo → *_shared -->
-![Hue Table Browser — shared lab table](images/hue/03-table-browser-shared.png)
-
 ## 4. Query the table in the Editor
 
 1. Open **Editor** and choose the **Hive** (or Impala) dialect matching your Virtual Warehouse.
@@ -82,20 +73,19 @@ Use the exact name printed by Step 4b if you overrode `ICEBERG_NAMESPACE` or `IC
 SHOW TABLES IN cdp_user_demo;
 
 SELECT *
-FROM cdp_user_demo.deduped_customers_shared
+FROM cdp_user_demo.raw_customers_shared
 LIMIT 10;
 ```
 
-Swap in `raw_customers_shared` if you published from `local_csv`.
+Swap in `deduped_customers_shared` if you published from Exercise 1 Parquet.
 
-<!-- Screenshot: Hue Editor with SELECT preview -->
-![Hue Editor — SELECT preview](images/hue/04-editor-select.png)
+![Hue Editor — SELECT preview of shared table](images/HueQuery_NewTable.png)
 
 Optional row-count check:
 
 ```sql
 SELECT COUNT(*) AS row_count
-FROM cdp_user_demo.deduped_customers_shared;
+FROM cdp_user_demo.raw_customers_shared;
 ```
 
 ## 5. What Hue can and cannot see
@@ -120,14 +110,3 @@ FROM cdp_user_demo.deduped_customers_shared;
 
 - Continue the lab narrative in Hue (explore schema, run ad-hoc SQL, compare row counts to notebook output).
 - Return to the notebooks for cleanup (`spark.stop()`, optional HDFS / table cleanup per your environment policy).
-
-## Image checklist (to add later)
-
-Place files under `use-case-phase-1/images/hue/`:
-
-| File | Content |
-|------|---------|
-| `01-open-hue.png` | Opening Hue from CDP / Virtual Warehouse |
-| `02-file-browser-tmp.png` | File Browser showing `/tmp/redundant_data.csv` |
-| `03-table-browser-shared.png` | Table Browser on `cdp_user_demo.*_shared` |
-| `04-editor-select.png` | Editor with successful `SELECT … LIMIT 10` |

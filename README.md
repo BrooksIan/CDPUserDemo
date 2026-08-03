@@ -12,7 +12,8 @@ This repository holds materials, assets, and working examples for CDP user scena
 CDPUserDemo/
 ├── README.md
 ├── use-case-phase-1/
-│   ├── README.md       # Phase 1 use case
+│   ├── README.md       # Phase 1 use case (with setup screenshots)
+│   ├── images/         # CAI / CDW / Hue UI screenshots
 │   └── notebooks/      # Phase 1 notebooks
 └── use-case-phase-2/   # Phase 2 use cases
 ```
@@ -20,13 +21,14 @@ CDPUserDemo/
 | Directory | Purpose |
 |-----------|---------|
 | [`use-case-phase-1/`](./use-case-phase-1/) | Phase 1 use case materials and demos |
+| [`use-case-phase-1/images/`](./use-case-phase-1/images/) | Screenshots for session setup, Hive auth, and Hue |
 | [`use-case-phase-1/notebooks/`](./use-case-phase-1/notebooks/) | Phase 1 Jupyter / analysis notebooks |
 | [`use-case-phase-2/`](./use-case-phase-2/) | Phase 2 use case materials and demos |
 
 ## Getting started
 
 1. Clone this repository.
-2. Open the phase directory that matches the use case you are working on.
+2. Open [`use-case-phase-1/`](./use-case-phase-1/) for the Phase 1 lab (screenshots in the README walk through CAI session setup).
 3. Follow the notes and assets inside that phase folder.
 
 ## Contributing
