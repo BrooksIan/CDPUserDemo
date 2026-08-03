@@ -43,6 +43,7 @@ use-case-phase-1/
 | 1 | [`notebooks/01_Basic_Deduplication.ipynb`](./notebooks/01_Basic_Deduplication.ipynb) | Exact record-level dedup; write results under `/tmp` |
 | 2 | [`notebooks/02_Iceberg_REST_Catalog.ipynb`](./notebooks/02_Iceberg_REST_Catalog.ipynb) | Local Iceberg (optional) + publish shared table for Hue |
 | 3 | [`hueview.md`](./hueview.md) | Browse HDFS file and query `cdp_user_demo.*_shared` in Hue |
+| 4 | Data Catalog (below) | Find `cdp_user_demo.raw_customers_shared` and review schema |
 
 ## Prerequisites
 
@@ -93,6 +94,26 @@ Paste the JDBC URL and workload password or JWT into the notebook connection for
 After HDFS copy and/or shared publish, follow [`hueview.md`](./hueview.md) to confirm the file and `cdp_user_demo.*_shared` table in Hue.
 
 ![Hue Editor — query shared table](./images/HueQuery_NewTable.png)
+
+### 6. Verify in Data Catalog
+
+After the shared table is published, confirm it is discoverable in Cloudera Data Catalog.
+
+1. From the CDP console, open **Data Catalog**.
+
+![Data Catalog tile](./images/DataCatalogIcon.png)
+
+2. Land on the Data Catalog dashboard (search, datasets, and profilers).
+
+![Data Catalog dashboard](./images/DataCatalogEntryUI.png)
+
+3. Open **Search**, select your data lake, and search for `cdp_user_demo` (or the shared table name). Select the **Hive Table** `raw_customers_shared`.
+
+![Data Catalog search — cdp_user_demo / raw_customers_shared](./images/DatCatalogSearchForTable.png)
+
+4. Open the asset details and review the **Schema** tab (`id`, `name`, `email`, `address`).
+
+![Data Catalog asset details — table schema](./images/DataCatalogReturnTableSchema.png)
 
 ## Notes
 
