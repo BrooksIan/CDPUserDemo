@@ -2,6 +2,8 @@
 
 CDP user demo materials for Phase 1: prepare sample customer data in Cloudera AI Workbench, deduplicate it with Spark, publish results to a shared CDW warehouse, and verify in Hue.
 
+![Reference Architecture — User Demo Phase 1](./images/UseCasePhase1.png)
+
 ## Objective
 
 Walk through an end-to-end deduplication flow:
