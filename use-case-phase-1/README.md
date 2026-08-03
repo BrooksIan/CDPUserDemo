@@ -12,6 +12,7 @@ Walk through an end-to-end deduplication flow:
 2. Remove exact duplicate records
 3. Persist results (local Iceberg and/or shared Hive / CDW)
 4. Confirm outputs in Hue (File Browser and Table Browser)
+5. Verify governance and audit in Data Catalog (discover the shared table, review schema and asset metadata)
 
 ## Structure
 
