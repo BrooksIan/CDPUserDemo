@@ -70,9 +70,17 @@ Choose **JupyterLab**, **Python 3.10**, and a Spark-enabled runtime image. Start
 
 ### 3. Open the Phase 1 notebooks
 
-In the session file browser, go to `use-case-phase-1/notebooks/` and run the notebooks in order, starting with `00_Getting_Started.ipynb`.
+In the session file browser, go to `use-case-phase-1/notebooks/` and run the notebooks in order.
 
 ![Notebooks open in CAI session](./images/NoteBooksInSession.png)
+
+| Notebook | What it does |
+|----------|----------------|
+| [`00_Getting_Started.ipynb`](./notebooks/00_Getting_Started.ipynb) | Installs deps, creates a local Spark session, loads the sample CSV, runs `kinit`, and copies the file to HDFS `/tmp`. |
+| [`01_Basic_Deduplication.ipynb`](./notebooks/01_Basic_Deduplication.ipynb) | Performs exact record-level dedup on `name` + `email`, reports duplicate rates, and writes results under `/tmp` for later notebooks. |
+| [`02_Iceberg_REST_Catalog.ipynb`](./notebooks/02_Iceberg_REST_Catalog.ipynb) | Configures the shared Hive connection, optionally writes a local Iceberg table, and publishes `cdp_user_demo.*_shared` for Hue and Data Catalog. |
+
+Complete notebooks **00** and **01** before opening **02**. Notebook 02 depends on the local Spark setup, HDFS sample data, and deduplicated outputs from those first two notebooks.
 
 ### 4. Shared Hive / Hue auth (before Exercise 2 publish)
 
@@ -89,6 +97,8 @@ Before Step 0 in `02_Iceberg_REST_Catalog.ipynb`, gather credentials from CDW:
 Paste the JDBC URL and workload password or JWT into the notebook connection form, then **Save** and **Test Hive connection**.
 
 ![Step 0 — Shared Hive / Hue connection form](./images/TestHiveConnections.png)
+
+When the Hive connection test succeeds, finish the rest of [`02_Iceberg_REST_Catalog.ipynb`](./notebooks/02_Iceberg_REST_Catalog.ipynb) (local Iceberg optional, then Step 4b publish to the shared warehouse) before moving on to Hue or Data Catalog.
 
 ### 5. Verify in Hue
 
